@@ -1,11 +1,18 @@
 <script setup>
   import Main from './main/main.vue'
+  import Join from './member/join.vue'
   
   const router = useRouter()
   const goLogin = () => {
     router.addRoute({ name: 'main', path: '/main', component: Main });
     router.push('/main')
   }
+  const goJoin = () => {
+    router.addRoute({ name: 'join', path: '/join', component: Join });
+    router.push('/join')
+  }
+
+  let a = '1234';
 
 </script>
 
@@ -40,6 +47,15 @@
 
           <div>
             <button type="submit" @click="goLogin" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">로그인</button>
+            <br/>
+            <v-btn
+              :ripple="false"
+              height="50"
+              min-width="388"
+              @click="goJoin"
+            >
+              회원가입
+            </v-btn>
           </div>
         </form>
 
