@@ -1,3 +1,13 @@
+<script setup>
+
+import join2 from "~/pages/main/member/join2.vue";
+
+const router = useRouter()
+const goJoin = () => {
+  router.addRoute({ name: 'join2', path: '/join2', component: join2 });
+  router.push('/join2')
+}
+</script>
 <template>
   <div class="container">
     <div class="wrapper">
@@ -19,20 +29,24 @@
             <input type="checkbox" name="keeplogin">
             <span>로그인 유지</span>
           </label>
-            <a href="#" class="join">회원가입</a>
+          <button> @click="goJoin" class="join">회원가입</button>
         </div>
             <div class="find">
-              <a href="#" class="find-id">아이디 찾기 </a>
-              <span> | </span>
-              <a href="#" class="find-pw"> 비밀번호 찾기</a>
+              <button class="find-id">아이디 찾기</button>
+              <span>|</span>
+              <button class="find-pw">비밀번호 찾기</button>
             </div>
       </div>
       <div class="kakaoLogin">
-        <img src="@/pages/assets/kakao_login_medium_wide.png" alt="이미지 설명">
+        <label for="login-chk">
+          <span><img src="@/pages/assets/icons8-kakao-30.png" alt="카카오 로그인"></span>
+          <button>카카오 로그인</button>
+        </label>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
 .container {
@@ -43,7 +57,6 @@
 }
 .wrapper {
   display: flex;
-
   margin: 0 auto;
   max-width: 330px;
   flex-direction: column;
@@ -88,8 +101,8 @@
   margin-bottom: 15px;
   text-align: center;
   background-color: rgb(248, 179, 60);
-  cursor: pointer;
   border-radius: 4px;
+  cursor: pointer;
 }
 .login-btn button {
   font-size: 25px;
@@ -97,15 +110,22 @@
   text-align: center;
 }
 .login-save {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin: 10px 5px 30px 5px;
   display: flex;
   justify-content: space-between;
-
 }
 .login-save label {
   display: flex;
   align-items: center;
+}
+.login-save span {
+  font-size: 14px;
+}
+.login-save input {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  margin-right:7px;
 }
 .join {
   text-decoration-line: none;
@@ -116,16 +136,9 @@
 .join:visited {
   color: black;
 }
-.login-save input {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  margin-right:10px;
-}
 .find {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 60px;
 }
 .find-id {
   font-size: 14px;
@@ -147,14 +160,35 @@
 .find-pw:visited {
   color: black;
 }
-.kakaoLogin img {
+.kakaoLogin {
   width: 100%;
-  height: 56px;
+  height: 54px;
+  padding: 8px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #FEE500;
+  border-radius: 4px;
+  position: relative;
+}
+.kakaoLogin label {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-hr {
-  border: 0.1px solid grey;
+.kakaoLogin img {
+  display: inline;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
 }
+.kakaoLogin button {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 37px;
+  font-weight: 600;
+}
+
 </style>
-<script setup>
-</script>
+

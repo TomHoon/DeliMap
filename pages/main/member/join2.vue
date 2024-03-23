@@ -40,7 +40,7 @@
           <input type="text" id="join-email" class="join-email" placeholder="이메일을 입력해주세요">
           <div class="email_check_memo">올바른 이메일 형식이 아닙니다. 예시) example@email.com</div>
         </div>
-        <div class="login-btn">
+        <div class="join-btn">
           <button>회원가입</button>
         </div>
       </div>
@@ -108,7 +108,7 @@
   border-radius: 5px;
   color: #696969;
   margin-top: 5px;
-  margin-bottom:10px;
+  margin-bottom:5px;
   display: inline-block;
 }
 .join-id:focus {
@@ -121,7 +121,7 @@
 }
 .id_check_memo {
   font-size: 12px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   margin-left: 5px;
 }
 .join-pw {
@@ -131,7 +131,7 @@
   border: 1px solid #d3d3d3;
   border-radius: 5px;
   color: #696969;
-  margin-bottom:10px;
+  margin-bottom:5px;
   margin-top: 5px;
 }
 .join-pw:focus {
@@ -144,7 +144,7 @@
 }
 .pw_check_memo {
   font-size: 12px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   margin-left: 5px;
 }
 .join-name {
@@ -224,7 +224,7 @@
   border: 1px solid #d3d3d3;
   border-radius: 5px;
   color: #696969;
-  margin-bottom:10px;
+  margin-bottom:5px;
   margin-top: 5px;
 }
 .join-email:focus {
@@ -237,32 +237,21 @@
 }
 .email_check_memo {
   font-size: 12px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   margin-left: 5px;
 }
-.login-neccessary {
-  width: 100%;
-  border-bottom:1px solid rgb(218, 218, 218);
-  padding:10px;
-  color: black;
-  font-size: 15px;
-}
-.login-neccessary::placeholder {
-  color: #A2A2A1;
-  font-size: 14px;
-}
-.login-btn {
+.join-btn {
   width: 100%;
   border:1px solid rgb(247, 160, 8);
   padding: 8px;
   margin-top: 50px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
   text-align: center;
   background-color: rgb(248, 179, 60);
   cursor: pointer;
   border-radius: 4px;
 }
-.login-btn button {
+.join-btn button {
   font-size: 25px;
   color:white;
   text-align: center;
