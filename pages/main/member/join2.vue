@@ -92,9 +92,18 @@
               v-model="authKey"
             />
             <div class="auth-area">
-              <button @click="emailCheck()" style="padding: 10px; border: 1px solid black; border-radius: 10px;">인증번호 확인</button>
+              <button
+                @click="emailCheck()"
+                style="
+                  padding: 10px;
+                  border: 1px solid black;
+                  border-radius: 10px;
+                "
+              >
+                인증번호 확인
+              </button>
               <span style="padding: 10px">
-                {{ getEmailAuth == -1 }}
+                {{ getEmailAuth }}
               </span>
             </div>
           </div>
@@ -107,24 +116,28 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed } from "vue";
 
-const devApi = useNuxtApp().$devApi
+const devApi = useNuxtApp().$devApi;
 
 const member = reactive({
-  member_id: '',
-  member_pw: '',
-  member_name: '',
-  member_nickname: '',
-  member_email: ''
+  member_id: "",
+  member_pw: "",
+  member_name: "",
+  member_nickname: "",
+  member_email: "",
 });
 
 let authChk = ref(-1); // -1: 인증메일미전송, 0: 인증실패, 1: 인증성공
-let authKey = reactive(''); // -1: 인증메일미전송, 0: 인증실패, 1: 인증성공
+let authKey = reactive(""); // -1: 인증메일미전송, 0: 인증실패, 1: 인증성공
 
 const getEmailAuth = computed(() => {
-  return authChk;
-})
+  return authChk.value == 0
+    ? "인증실패"
+    : authChk.value == 1
+    ? "인증성공"
+    : "이메일 인증해주세요";
+});
 
 const joinMember = async () => {
   if (authChk != 1) {
@@ -132,39 +145,39 @@ const joinMember = async () => {
     return;
   }
   const res = await devApi.post("/members/joinMember", member);
-}
+};
 
 const sendEmailAuth = async () => {
   const param = {
     member_email: member.member_email,
-    member_id: member.member_id
-  }
+    member_id: member.member_id,
+  };
 
   if (!member.member_email) {
-    alert('이메일 입력하세요');
+    alert("이메일 입력하세요");
     return;
   }
 
   const res = await devApi.post("/mail", param);
-}
+  alert("이메일전송완료!");
+};
 
 const emailCheck = async () => {
   const param = {
     auth_key: authKey,
-    member_email: member.member_email
-  }
+    member_email: member.member_email,
+  };
 
   if (!member.member_email) {
-    alert('이메일 입력하세요');
+    alert("이메일 입력하세요");
     return;
   }
 
   const res = await devApi.post("/mail/check", param);
-  console.log('authchk > ', authChk);
-  console.log('res.data > ', res.data);
-  authChk.value = 2;
-}
-
+  console.log("authchk > ", authChk);
+  console.log("res.data > ", res.data);
+  authChk.value = res.data ? 1 : 0;
+};
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Ultra&display=swap");

@@ -1,10 +1,30 @@
 <script setup>
 import join2 from "~/pages/main/member/join2.vue";
+import { reactive, ref } from "vue";
+const devApi = useNuxtApp().$devApi;
+
+let member_id = ref("");
+let member_pw = ref("");
 
 const router = useRouter();
 const goJoin = () => {
   router.addRoute({ name: "join2", path: "/join2", component: join2 });
   router.push("/join2");
+};
+
+const login = async () => {
+  const param = {
+    member_id: member_id.value,
+    member_pw: member_pw.value,
+  };
+  const res = await devApi.post("/members/login", param);
+  const isMember = res.data;
+
+  if (isMember) {
+    router.push("/");
+  } else {
+    alert("로그인 실패 아이디 비번 다시입력하세요");
+  }
 };
 </script>
 <template>
@@ -15,17 +35,23 @@ const goJoin = () => {
       </div>
       <div class="login-bottom">
         <div class="login-id">
-          <input type="text" class="login-neccessary" placeholder="아이디" />
+          <input
+            type="text"
+            class="login-neccessary"
+            placeholder="아이디"
+            v-model="member_id"
+          />
         </div>
         <div class="login-pw">
           <input
             type="password"
             class="login-neccessary"
             placeholder="비밀번호"
+            v-model="member_pw"
           />
         </div>
         <div class="login-btn">
-          <button>로그인</button>
+          <button @click="login()">로그인</button>
         </div>
         <div class="login-save">
           <label for="login-chk">
