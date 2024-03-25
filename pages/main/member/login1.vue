@@ -1,12 +1,11 @@
 <script setup>
-
 import join2 from "~/pages/main/member/join2.vue";
 
-const router = useRouter()
+const router = useRouter();
 const goJoin = () => {
-  router.addRoute({ name: 'join2', path: '/join2', component: join2 });
-  router.push('/join2')
-}
+  router.addRoute({ name: "join2", path: "/join2", component: join2 });
+  router.push("/join2");
+};
 </script>
 <template>
   <div class="container">
@@ -16,30 +15,36 @@ const goJoin = () => {
       </div>
       <div class="login-bottom">
         <div class="login-id">
-          <input type="text" class="login-neccessary" placeholder="아이디">
+          <input type="text" class="login-neccessary" placeholder="아이디" />
         </div>
         <div class="login-pw">
-          <input type="password" class="login-neccessary" placeholder="비밀번호">
+          <input
+            type="password"
+            class="login-neccessary"
+            placeholder="비밀번호"
+          />
         </div>
         <div class="login-btn">
           <button>로그인</button>
         </div>
-        <div class="login-save" >
+        <div class="login-save">
           <label for="login-chk">
-            <input type="checkbox" name="keeplogin">
+            <input type="checkbox" name="keeplogin" />
             <span>로그인 유지</span>
           </label>
-          <button> @click="goJoin" class="join">회원가입</button>
+          <button @click="goJoin" class="join">회원가입</button>
         </div>
-            <div class="find">
-              <button class="find-id">아이디 찾기</button>
-              <span>|</span>
-              <button class="find-pw">비밀번호 찾기</button>
-            </div>
+        <div class="find">
+          <button class="find-id">아이디 찾기</button>
+          <span>|</span>
+          <button class="find-pw">비밀번호 찾기</button>
+        </div>
       </div>
       <div class="kakaoLogin">
         <label for="login-chk">
-          <span><img src="@/pages/assets/icons8-kakao-30.png" alt="카카오 로그인"></span>
+          <span
+            ><img src="@/pages/assets/icons8-kakao-30.png" alt="카카오 로그인"
+          /></span>
           <button>카카오 로그인</button>
         </label>
       </div>
@@ -48,11 +53,11 @@ const goJoin = () => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ultra&display=swap");
 .container {
   display: flex;
   margin: 0 auto;
-  padding-top:30px;
+  padding-top: 30px;
   padding-bottom: 30px;
 }
 .wrapper {
@@ -63,11 +68,11 @@ const goJoin = () => {
   position: relative;
 }
 .login-top {
-  padding:40px 0;
-  color:rgb(248, 179, 60);
+  padding: 40px 0;
+  color: rgb(248, 179, 60);
   text-align: center;
 }
-.login-top span{
+.login-top span {
   margin: 0 auto;
   font-size: 60px;
   font-family: "Ultra", serif;
@@ -80,22 +85,22 @@ const goJoin = () => {
   outline: none;
 }
 .login-id {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 .login-neccessary {
   width: 100%;
-  border-bottom:1px solid rgb(218, 218, 218);
-  padding:10px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  padding: 10px;
   color: black;
   font-size: 15px;
 }
 .login-neccessary::placeholder {
-  color: #A2A2A1;
+  color: #a2a2a1;
   font-size: 14px;
 }
 .login-btn {
   width: 100%;
-  border:1px solid rgb(247, 160, 8);
+  border: 1px solid rgb(247, 160, 8);
   padding: 8px;
   margin-top: 50px;
   margin-bottom: 15px;
@@ -106,7 +111,7 @@ const goJoin = () => {
 }
 .login-btn button {
   font-size: 25px;
-  color:white;
+  color: white;
   text-align: center;
 }
 .login-save {
@@ -125,7 +130,7 @@ const goJoin = () => {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  margin-right:7px;
+  margin-right: 7px;
 }
 .join {
   text-decoration-line: none;
@@ -167,7 +172,7 @@ const goJoin = () => {
   margin-top: 50px;
   margin-bottom: 15px;
   text-align: center;
-  background-color: #FEE500;
+  background-color: #fee500;
   border-radius: 4px;
   position: relative;
 }
@@ -189,6 +194,4 @@ const goJoin = () => {
   line-height: 37px;
   font-weight: 600;
 }
-
 </style>
-
