@@ -2,25 +2,9 @@
 import { ref, onMounted } from 'vue'
 import Menu from './main/menu.vue'
 
-let keyword = ref('')
-
-// 단일 마커
-let marker = null;
-
-// 마커를 담을 배열입니다
-let markers = [];
-
-let map = null;
-let ps = null;
-let infowindow = null;
-
+let markerInfowindow = null;
 let latlng = null;
 let message = null;
-
-let markerInfowindow = null;
-
-let lat = null;
-let lon = null;
 
 onMounted(() => {
   geolocation();
@@ -49,6 +33,10 @@ onMounted(() => {
   });
 })
 
+let map = null;
+let ps = null;
+let infowindow = null;
+
 function makeMap() {
   let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -58,7 +46,7 @@ function makeMap() {
 
   // 지도를 생성합니다    
   map = new kakao.maps.Map(mapContainer, mapOption);
-  
+
   // 장소 검색 객체를 생성합니다
   ps = new kakao.maps.services.Places();
 
@@ -69,11 +57,16 @@ function makeMap() {
   searchPlaces();
 }
 
+// 단일 마커
+let marker = null;
+
 function makeMarker() {
   marker = new kakao.maps.Marker();
   // 지도에 마커를 표시합니다
   marker.setMap(map);
 }
+
+let keyword = ref('') // keyword.value 형태로 값을 가져올 수 있음.
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -86,6 +79,9 @@ function searchPlaces() {
   // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
   ps.keywordSearch(keyword.value, placesSearchCB);
 }
+
+let lat = null;
+let lon = null;
 
 function geolocation() {
   // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -100,7 +96,7 @@ function geolocation() {
       var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         message = '<div style="padding:5px;">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
 
-        console.log(message)
+      console.log(message)
       // 마커와 인포윈도우를 표시합니다
       displayMarker(locPosition, message);
 
@@ -243,6 +239,9 @@ function addMarker(position, idx, title) {
 
   return marker;
 }
+
+// 마커를 담을 배열입니다
+let markers = [];
 
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
