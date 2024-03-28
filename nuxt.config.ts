@@ -12,5 +12,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
-  ]
+  ],
+  
+  
+  // hot reload 임시주석
+  // vite: {
+  //   server: {
+  //     watch: {
+  //       usePolling: true
+  //     }
+  //   }
+  // }
 })
