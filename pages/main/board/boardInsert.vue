@@ -14,6 +14,7 @@ const onFileChange: (event: Event) => void = (event) => {
 
   reader.readAsDataURL(file);
 };
+
 </script>
 
 <template>
@@ -25,23 +26,17 @@ const onFileChange: (event: Event) => void = (event) => {
           <label for="insert_title">맛집 이름</label>
           <input type="text" id="insert_title" class="insert_title" autocomplete="off" placeholder="맛집 이름을 입력해주세요">
         </div>
+        <div class="tasty_content">
+          <label for="insert_content">맛집 설명</label>
+          <textarea id="insert_content" class="insert_content" autocomplete="off" placeholder="맛집 설명을 입력해주세요"></textarea>
+        </div>
         <div class="tasty_address">
           <label for="insert_address">맛집 주소</label>
           <input type="text" id="insert_address" class="insert_address" autocomplete="off" placeholder="맛집 주소를 입력해주세요">
         </div>
         <div class="tasty_phone">
           <label for="insert_phone">맛집 전화번호</label>
-          <input type="text" id="insert_phone" class="insert_phone" autocomplete="off" placeholder="맛집 전화번호를 입력해주세요">
-        </div>
-        <div class="tasty_time">
-          <label for="insert_time">영업시간</label>
-          <span>월요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 09:00 ~ 22:00">
-          <span>화요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 09:00 ~ 22:00">
-          <span>수요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 09:00 ~ 22:00">
-          <span>목요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 09:00 ~ 22:00">
-          <span>금요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 09:00 ~ 22:00">
-          <span>토요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 11:00 ~ 20:00">
-          <span>일요일 : </span><input type="text" id="insert_time" class="insert_time" autocomplete="off" placeholder="예) 휴무일">
+          <input type="number" id="insert_phone" class="insert_phone" autocomplete="off" placeholder="맛집 전화번호를 입력해주세요">
         </div>
         <div class="tasty_file">
           <label for="insert_file">사진<span>(대표이미지 1장을 입력해주세요)</span></label>
@@ -67,7 +62,6 @@ const onFileChange: (event: Event) => void = (event) => {
 .wrapper {
   border: 1px solid rgb(248, 179, 60);
   border-radius: 20px;
-  width: 700px;
   padding: 20px;
 }
 .mainTitle {
@@ -89,6 +83,28 @@ const onFileChange: (event: Event) => void = (event) => {
 }
 .insert_title:focus {
   outline: none ;
+}
+.tasty_content {
+  margin: 15px 15px 15px 20px;
+}
+.tasty_content label {
+  font-size: 17px;
+}
+.insert_content {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 15px 5px 5px 5px;
+  height: 70px;
+  resize: none;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+.insert_content::-webkit-scrollbar {
+  display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+.insert_content:focus {
+  outline: none;
 }
 .tasty_address {
   margin: 15px 15px 15px 20px;
@@ -117,30 +133,15 @@ const onFileChange: (event: Event) => void = (event) => {
   width: 100%;
   padding: 3px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 .insert_phone:focus {
-  outline: none ;
-}
-.tasty_time {
-  margin: 15px 15px 15px 20px;
-}
-.tasty_time label {
-  font-size: 17px;
-  display: block;
-}
-.tasty_time span {
-  font-size: 14px;
-}
-.insert_time {
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  width: 80%;
-  padding: 3px;
-  font-size: 15px;
-}
-.insert_time::placeholder {
-  font-size: 15px;
-}
-.insert_time:focus {
   outline: none ;
 }
 .tasty_file {
