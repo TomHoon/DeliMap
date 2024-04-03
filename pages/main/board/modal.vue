@@ -61,14 +61,17 @@ export default defineComponent({
   border-radius: 20px;
 }
 .modal-x {
-  position: relative;
-  padding: 10px 20px 0 0 ;
-  width: 100%;
   text-align: right;
+  z-index: 100;
+  transform: translate(-30px, 10px);
 }
 .modal-x span {
   font-size: 20px;
   cursor: pointer;
+  position: absolute;
+  float: right;
+  text-align: right;
+
 
 }
 .modal-container {
@@ -86,7 +89,7 @@ export default defineComponent({
   /* 스타일 설정 */
 }
 .modal-body {
-
+  margin-top: 50px;
 }
 .drag-disable {
   -ms-user-select: none;
