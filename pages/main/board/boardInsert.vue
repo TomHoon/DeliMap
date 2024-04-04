@@ -5,6 +5,7 @@ const insert_title = ref('');
 const insert_content = ref('');
 const insert_address = ref('');
 const insert_phone = ref('');
+
 const goInsert = () => {
   alert('등록');
 }
@@ -77,12 +78,14 @@ const onFileChange: (event: Event) => void = (event) => {
               </span>
             </span>
             <span class="show_insert_score_right">
-              <img src="@/pages/assets/icons8-binstar-48.png" class="score1" alt="별점">
-              <img src="@/pages/assets/icons8-binstar-48.png" class="score2" alt="별점">
-              <img src="@/pages/assets/icons8-binstar-48.png" class="score3" alt="별점">
-              <img src="@/pages/assets/icons8-binstar-48.png" class="score4" alt="별점">
-              <img src="@/pages/assets/icons8-binstar-48.png" class="score5" alt="별점">
-              <span>0점</span>
+              <label>
+                <img src="@/pages/assets/icons8-binstar-48.png" class="score1" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" class="score2" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" class="score3" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" class="score4" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" class="score5" alt="별점">
+                <span>0점</span>
+              </label>
             </span>
           </label>
         </div>
@@ -97,6 +100,7 @@ const onFileChange: (event: Event) => void = (event) => {
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
@@ -297,6 +301,10 @@ input[type='number'] {
   .show_insert_score span {
     font-size: 20px;
     margin: 0 20px 0 10px;
+  }
+  .show_insert_score_right label {
+    display: flex;
+    align-items: center;
   }
   .show_insert_address {
     margin: 30px 15px 15px 15px;
