@@ -9,7 +9,7 @@
         <div class="modal-container">
           <div class="modal-header">
             <slot name="header">
-              <textarea class="comment_content"></textarea>
+              <textarea class="comment_content" v-model="comment_content"></textarea>
               <div class="comment_btn">
                 <button class="comment_cancel" @click="commentCancel">취소</button>
                 <button class="comment_reg" @click="commentReg">등록</button>
@@ -23,12 +23,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from 'vue';
+import {defineComponent, ref} from 'vue';
+import request from "~/pages/api";
 
 export default defineComponent({
-  name: 'Modal',
+  name: 'commentInsert',
   emits: ['close'],
   setup(props, { emit }) {
+    const comment_content = ref('');
+
     const closeModal = () => {
       emit('close');
     };
@@ -39,13 +42,26 @@ export default defineComponent({
         return false;
       }
     }
-    const commentReg = () =>{
+    const commentReg = async () => {
+      let param = {
+        member_id: '아이디2',
+        review_no : '1',
+        comment_content : comment_content.value,
+      }
+      const res = await request.post('http://localhost:3300/comment/insert', param);
+      console.log('res : ', res)
+      console.log('res.data : ', res.data)
       alert("등록 되었습니다.")
-      location.reload();
+      // location.reload();
     }
 
 
-    return { closeModal, commentCancel, commentReg };
+    return {
+      closeModal,
+      commentCancel,
+      commentReg,
+      comment_content
+    };
   },
 });
 </script>
@@ -75,10 +91,15 @@ export default defineComponent({
   z-index: 100;
   width: 35px;
   height: 40px;
-  background-color: white;
   transform: translateX(500px);
   border-radius: 0 6px 6px 0;
   cursor: pointer;
+  background-color: rgba(0,0,0,0.1);
+}
+.modal-x:hover {
+  background-color: rgb(248, 179, 60);
+  color: white;
+
 }
 .modal-x span {
   font-size: 22px;

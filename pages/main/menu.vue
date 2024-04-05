@@ -5,6 +5,7 @@ import boardInsert from "./board/boardInsert.vue";
 import boardListModal from "./board/boardList.vue";
 import commentInsert from "./board/commentInsert.vue";
 import { ref} from 'vue';
+import request from "~/pages/api";
 const boardModal = ref(false);
 const reviewModal = ref(false);
 const commentModal = ref(false);
@@ -16,6 +17,16 @@ const showFavorite = ref(true);
 const showFavoriteRed = ref(false);
 const showNotSave = ref(true);
 const showIsSave = ref(false);
+const member_id = ref('');
+const review_content = ref('');
+const review_hashtag = ref('');
+const review_score = ref('1');
+const binStar = ref('_nuxt/pages/assets/icons8-binstar-48.png');
+const fullStar = ref('_nuxt/pages/assets/icons8-fullstar-48.png');
+
+
+
+
 const copyUrl =  () => {
   const url: string = location.href;
   try {
@@ -46,11 +57,93 @@ const reviewCancel = () => {
     return false;
   }
 }
-const reviewReg = () => {
+const reviewReg = async () => {
+  let param =  {
+    member_id : '아이디2',
+    review_content : review_content.value,
+    review_score : review_score.value,
+    review_hashtag : review_hashtag.value,
+  }
+  const res = await request.post('http://localhost:3300/review/insert', param);
+  console.log("res", res);
+  console.log("res.data", res.data);
   alert("등록 되었습니다.")
   location.reload();
 
 }
+
+const changeImage = (index: number) => {
+  if(index==1){
+    const imageElement2 = document.getElementById('review_score2') as HTMLImageElement;
+    const imageElement3 = document.getElementById('review_score3') as HTMLImageElement;
+    const imageElement4 = document.getElementById('review_score4') as HTMLImageElement;
+    const imageElement5 = document.getElementById('review_score5') as HTMLImageElement;
+    if(imageElement2.src.includes('fullstar')){
+      imageElement2.src = binStar.value;
+      imageElement3.src = binStar.value;
+      imageElement4.src = binStar.value;
+      imageElement5.src = binStar.value;
+    }
+    review_score.value = '1';
+  }
+  if(index==2){
+    const imageElement1 = document.getElementById('review_score1') as HTMLImageElement;
+    const imageElement2 = document.getElementById('review_score2') as HTMLImageElement;
+    const imageElement3 = document.getElementById('review_score3') as HTMLImageElement;
+    const imageElement4 = document.getElementById('review_score4') as HTMLImageElement;
+    const imageElement5 = document.getElementById('review_score5') as HTMLImageElement;
+    if(imageElement2.src.includes('binstar')){
+      imageElement2.src = fullStar.value;
+    }else{
+      imageElement3.src = binStar.value;
+      imageElement4.src = binStar.value;
+      imageElement5.src = binStar.value;
+    }
+    review_score.value = '2';
+  }
+  if(index==3){
+    const imageElement2 = document.getElementById('review_score2') as HTMLImageElement;
+    const imageElement3 = document.getElementById('review_score3') as HTMLImageElement;
+    const imageElement4 = document.getElementById('review_score4') as HTMLImageElement;
+    const imageElement5 = document.getElementById('review_score5') as HTMLImageElement;
+    if(imageElement3.src.includes('binstar')){
+      imageElement2.src = fullStar.value;
+      imageElement3.src = fullStar.value;
+    }else {
+      imageElement4.src = binStar.value;
+      imageElement5.src = binStar.value;
+    }
+    review_score.value = '3';
+  }
+  if(index==4){
+    const imageElement2 = document.getElementById('review_score2') as HTMLImageElement;
+    const imageElement3 = document.getElementById('review_score3') as HTMLImageElement;
+    const imageElement4 = document.getElementById('review_score4') as HTMLImageElement;
+    const imageElement5 = document.getElementById('review_score5') as HTMLImageElement;
+    if(imageElement4.src.includes('binstar')){
+      imageElement2.src = fullStar.value;
+      imageElement3.src = fullStar.value;
+      imageElement4.src = fullStar.value;
+    }else {
+      imageElement5.src = binStar.value;
+    }
+    review_score.value = '4';
+  }
+  if(index==5){
+    const imageElement2 = document.getElementById('review_score2') as HTMLImageElement;
+    const imageElement3 = document.getElementById('review_score3') as HTMLImageElement;
+    const imageElement4 = document.getElementById('review_score4') as HTMLImageElement;
+    const imageElement5 = document.getElementById('review_score5') as HTMLImageElement;
+    if(imageElement5.src.includes('binstar')){
+      imageElement2.src = fullStar.value;
+      imageElement3.src = fullStar.value;
+      imageElement4.src = fullStar.value;
+      imageElement5.src = fullStar.value;
+    }
+    review_score.value = '5';
+  }
+};
+
 const router = useRouter()
 const goLogin = () => {
   router.addRoute({ name: 'login1', path: '/login1', component: login1 });
@@ -105,11 +198,11 @@ const tastyInsert = () => {
           </span>
             <span class="board_score_right">
               <label>
-                <img src="../assets/icons8-binstar-48.png" id="score1" class="score1" alt="별점">
-                <img src="@/pages/assets/icons8-binstar-48.png" class="score2" alt="별점">
-                <img src="@/pages/assets/icons8-binstar-48.png" class="score3" alt="별점">
-                <img src="@/pages/assets/icons8-binstar-48.png" class="score4" alt="별점">
-                <img src="@/pages/assets/icons8-binstar-48.png" class="score5" alt="별점">
+                <img src="../assets/icons8-binstar-48.png" id="board_score1" class="board_score1" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" id="board_score2" class="board_score2" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" id="board_score3" class="board_score3" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" id="board_score4" class="board_score4" alt="별점">
+                <img src="@/pages/assets/icons8-binstar-48.png" id="board_score5" class="board_score5" alt="별점">
                 <span>5점</span>
               </label>
           </span>
@@ -166,7 +259,9 @@ const tastyInsert = () => {
                    @click="showFavorite = false; showFavoriteRed = true" alt="좋아요" title="좋아요">
               <img src="../assets/icons8-favorite_red-24.png" v-show="showFavoriteRed"
                    @click="showFavorite = true; showFavoriteRed = false" alt="좋아요" title="좋아요">
-              <button class="deli_comment_btn" @click="commentModal = true; ">댓글 쓰기</button>
+              <button class="deli_comment_btn" >
+                <span @click="commentModal = true;">댓글 쓰기</span>
+              </button>
             </label>
           </div>
           <div class="borderLine"/>
@@ -207,18 +302,18 @@ const tastyInsert = () => {
       <div class="reviewInsert_container">
         <div class="reviewInsert_score_wrap">
           <div class="reviewInsert_score">
-            <img src="../assets/icons8-binstar-48.png" id="score1" class="score1" alt="별점">
-            <img src="@/pages/assets/icons8-binstar-48.png" class="score2" alt="별점">
-            <img src="@/pages/assets/icons8-binstar-48.png" class="score3" alt="별점">
-            <img src="@/pages/assets/icons8-binstar-48.png" class="score4" alt="별점">
-            <img src="@/pages/assets/icons8-binstar-48.png" class="score5" alt="별점">
+            <img src="@/pages/assets/icons8-fullstar-48.png" id="review_score1" class="review_score1" alt="별점" @click="changeImage(1)">
+            <img src="@/pages/assets/icons8-binstar-48.png" id="review_score2" class="review_score2" alt="별점" @click="changeImage(2)">
+            <img src="@/pages/assets/icons8-binstar-48.png" id="review_score3" class="review_score3" alt="별점" @click="changeImage(3)">
+            <img src="@/pages/assets/icons8-binstar-48.png" id="review_score4" class="review_score4" alt="별점" @click="changeImage(4)">
+            <img src="@/pages/assets/icons8-binstar-48.png" id="review_score5" class="review_score5" alt="별점" @click="changeImage(5)">
           </div>
         </div>
         <div class="reviewInsert_content">
-          <textarea placeholder="리뷰 내용을 적어주세요."></textarea>
+          <textarea placeholder="리뷰 내용을 적어주세요." v-model="review_content"></textarea>
         </div>
         <div class="reviewInsert_hashtag">
-          <input type="text" placeholder="#해시태그">
+          <input type="text" placeholder="#해시태그" v-model="review_hashtag"/>
         </div>
         <div class="reviewInsert_btn">
           <button class="reviewInsert_cancel" @click="reviewCancel">취소</button>

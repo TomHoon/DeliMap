@@ -39,7 +39,7 @@ import request from "~/pages/api";
 const board_list = ref([]);
 
 export default defineComponent({
-  name: 'Modal',
+  name: 'boardList',
   emits: ['close'],
   async setup(props, { emit }) {
     const closeModal = () => {
